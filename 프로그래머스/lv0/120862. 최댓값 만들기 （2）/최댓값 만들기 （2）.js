@@ -1,4 +1,9 @@
 function solution(numbers) {
-  const sorted = numbers.sort((a, b) => a - b);
-  return Math.max(sorted[0] * sorted[1], sorted[sorted.length - 1] * sorted[sorted.length - 2]);
+    var answer = [];
+    for(let i = 0; i < numbers.length - 1; i++){
+        for(let j = i + 1; j < numbers.length; j++){
+            answer.push(numbers[i] * numbers[j]);
+        }
+    }
+    return Math.max(...answer);
 }
