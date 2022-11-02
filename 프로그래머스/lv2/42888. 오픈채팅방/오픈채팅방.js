@@ -1,5 +1,3 @@
-
-
 function solution(record) {
     let users = {}
     let result = [];
