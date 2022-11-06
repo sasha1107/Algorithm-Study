@@ -1,3 +1,3 @@
 function solution(array, height) {
-    return array.sort().filter(i => i > height).length
+    return array.filter(i => i > height).length
 }
