@@ -1,9 +1,3 @@
 function solution(n) {
-    var answer = [];
-    for (let i=1 ; i<n+1; i++){
-       if (i % 2 == 1) {
-           answer.push(i)
-       } 
-    }
-    return answer;
+    return n % 2 == 0 ? Array(~~(n/2)).fill(0).map((_, index) => index * 2 + 1) : Array(~~(n/2)+1).fill(0).map((_, index) => index * 2 + 1);
 }
