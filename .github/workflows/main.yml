@@ -1,0 +1,31 @@
+name: 파일 복사 및 확장자 변경
+
+on:
+  push:
+    branches:
+      - main  # 변경을 원하는 브랜치
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 리포지토리 체크아웃
+      uses: actions/checkout@v2
+
+    - name: 변경된 파일 필터링
+      id: file_filter
+      run: |
+        echo "::set-output name=changed_files::$(git diff --name-only HEAD^ '백준/**/README.md' '백준/**/{*.js,*.py}')"
+
+    - name: 파일 복사 및 확장자 변경
+      run: |
+        for file in ${{ steps.file_filter.outputs.changed_files }}; do
+          if [[ $file == *"/README.md" ]]; then
+            new_file="data/$(basename -- $file .md).mdx"
+            cp "$file" "$new_file"
+          else
+            new_file="data/$(basename -- $file)"
+            cp "$file" "$new_file"
+          fi
+        done
